@@ -36,7 +36,7 @@ const items = [
   },
   {
     title: "Pagos",
-    url: "#",
+    url: "/payments",
     icon: ReceiptText,
   },
   {

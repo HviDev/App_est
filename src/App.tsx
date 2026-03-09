@@ -5,6 +5,7 @@ import MainLayout from "./components/layout/MainLayour"
 import Home from "@/modules/home/pages/Home"
 import Login from "@/modules/auth/pages/Login"
 import  Signup  from "@/modules/auth/pages/Signup"
+import Payments from "@/modules/payments/pages/paymets"
 import ProtectedRoute from './modules/auth/components/ProtectedRoute'
 import { useEffect } from "react";
 import { useAuthStore } from "@/modules/home/store/auth.store";
@@ -24,6 +25,7 @@ export function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          
 
           <Route element={
             <ProtectedRoute>
@@ -31,6 +33,7 @@ export function App() {
             </ProtectedRoute>
           }>
             <Route path="/" element={<Home />} />
+            <Route path="/payments" element={<Payments />} />
           </Route>
         </Routes>
       </BrowserRouter>
