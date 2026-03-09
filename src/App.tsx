@@ -8,7 +8,7 @@ import  Signup  from "@/modules/auth/pages/Signup"
 import Payments from "@/modules/payments/pages/paymets"
 import ProtectedRoute from './modules/auth/components/ProtectedRoute'
 import { useEffect } from "react";
-import { useAuthStore } from "@/modules/home/store/auth.store";
+import { useAuthStore } from "@/modules/auth/store/auth.store";
 
 
 export function App() {

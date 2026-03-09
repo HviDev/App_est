@@ -1,6 +1,6 @@
 import { Calendar, BrushCleaning, ReceiptText, User2, ChevronUp, Heater, Wrench } from "lucide-react"
 import { Link } from "react-router-dom"
-import { useAuthStore } from "@/modules/home/store/auth.store";
+import { useAuthStore } from "@/modules/auth/store/auth.store";
 
 
 import {

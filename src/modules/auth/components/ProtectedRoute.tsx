@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { useAuthStore } from "@/modules/home/store/auth.store"
+import { useAuthStore } from "@/modules/auth/store/auth.store"
 import type { ReactNode } from "react"
 import { useLocation } from "react-router-dom"
 

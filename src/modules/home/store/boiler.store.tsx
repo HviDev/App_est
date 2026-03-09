@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { db, Query, functions, realtime, } from "../../../../appwriteConfig";
-import type { UserData } from "./auth.store";
+import type { UserData } from "../../auth/store/auth.store";
 
 export type BoilerStatus = {
   $id: string;

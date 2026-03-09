@@ -13,7 +13,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useAuthStore } from "@/modules/home/store/auth.store"
+import { useAuthStore } from "@/modules/auth/store/auth.store"
 import {  useState, useRef, useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 

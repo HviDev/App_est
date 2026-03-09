@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Card, CardContent, CardTitle, CardHeader, CardDescription, CardFooter, CardAction } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useAuthStore } from "@/modules/home/store/auth.store";
+import { useAuthStore } from "@/modules/auth/store/auth.store";
 import { useBoilerStore } from "@/modules/home/store/boiler.store";
 
 export default function Home() {
