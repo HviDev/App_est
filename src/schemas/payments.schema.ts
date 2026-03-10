@@ -6,8 +6,8 @@ export const paymentSchema = z.object({
   status: z.enum(["PENDIENTE", "PAGADO", "VENCIDO"]),
   monthIndex: z.number(),
   year: z.number(),
-  paymentDate: z.iso.datetime().optional,
-  paymentMethod: z.enum(["EFECTIVO", "SPEI", "DEPOSITO"]).optional(),
+  paymentDate: z.string().optional().nullable(),
+  paymentMethod: z.enum(["EFECTIVO", "SPEI", "DEPOSITO"]).optional().nullable(),
 
   userData: z.object({
     userId: z.string(),
