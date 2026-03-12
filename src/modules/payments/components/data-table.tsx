@@ -17,6 +17,16 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+
+import type { RowData } from "@tanstack/react-table"
+
+// Extendemos la interfaz de Meta
+declare module "@tanstack/react-table" {
+  interface ColumnMeta<TData extends RowData, TValue> {
+    className?: string
+  }
+}
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -35,18 +45,19 @@ export function DataTable<TData, TValue>({
   return (
     <div className="overflow-hidden rounded-md border">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-muted/50">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
+                // LEER EL META AQUÍ
+                const meta = header.column.columnDef.meta;
+
                 return (
                   <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                    {/* Eliminamos el mx-auto para que el bloque no se centre solo */}
+                    <div className={meta?.className}>
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    </div>
                   </TableHead>
                 )
               })}
@@ -60,11 +71,18 @@ export function DataTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  // LEER EL META AQUÍ
+                  const meta = cell.column.columnDef.meta;
+
+                  return (
+                    <TableCell key={cell.id} className="border-y">
+                      <div className={meta?.className}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </div>
+                    </TableCell>
+                  )
+                })}
               </TableRow>
             ))
           ) : (

@@ -66,7 +66,7 @@ export default function Home() {
             <CardFooter className="flex flex-col gap-2 md:flex-row">
               {/* ENCENDER */}
               {status?.state !== "ENCENDIDO" && (
-                <Button className="w-full md:w-auto" onClick={() => joinBoiler(boiler.$id, userData)}>Encender Boiler</Button>
+                <Button variant="success" className="w-full md:w-auto" onClick={() => joinBoiler(boiler.$id, userData)}>Encender Boiler</Button>
               )}
 
               {/* NO OWNER → Unirse */}
