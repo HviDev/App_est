@@ -1,7 +1,7 @@
 import { Calendar, BrushCleaning, ReceiptText, User2, ChevronUp, Heater, Wrench } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useAuthStore } from "@/modules/auth/store/auth.store";
-
+import { useSidebar } from "@/components/ui/sidebar";
 
 import {
   Sidebar,
@@ -62,6 +62,13 @@ const items = [
 export function AppSidebar() {
 
   const { logout, loading } = useAuthStore();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  function autoCloseMobile () {
+    if (isMobile){
+      setOpenMobile(false);
+    }
+  }
 
   return (
     <Sidebar collapsible="icon">
@@ -76,7 +83,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link to={item.url} className="flex items-center gap-2">
+                    <Link 
+                      to={item.url} 
+                      className="flex items-center gap-2"
+                      onClick={ autoCloseMobile }>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
@@ -91,7 +101,6 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            {/* Footer con dropdown lo dejamos igual */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>

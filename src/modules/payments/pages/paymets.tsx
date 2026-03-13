@@ -6,19 +6,16 @@ import { DataTable } from "../components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PaymentsPage() {
-  // 1. Obtenemos el usuario autenticado
+  
   const user = useAuthStore((state) => state.user);
 
-  // 2. Obtenemos las funciones y datos del store de pagos
   const { payments, isLoading, error, fetchUserPayments, clearPayments } = usePaymentStore();
 
-  // 3. Efecto para cargar los datos al montar el componente
   useEffect(() => {
     if (user?.$id) {
       fetchUserPayments(user.$id);
     }
 
-    // Limpiamos los pagos al desmontar (opcional, para evitar fugas de datos)
     return () => clearPayments();
   }, [user?.$id, fetchUserPayments, clearPayments]);
 
