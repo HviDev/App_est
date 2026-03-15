@@ -132,7 +132,7 @@ export default function PaymentsPage() {
                       </AccordionTrigger>
 
                       <AccordionContent className="pb-4 pt-2 border-t space-y-4">
-                        {/* LISTA DINÁMICA DE DETALLES */}
+
                         <div className="grid grid-cols-1 gap-3 pt-4">
                           {details.map((field, idx) => (
                             <div key={idx} className="flex justify-between items-end border-b border-border/40 pb-2 last:border-0">
@@ -162,9 +162,31 @@ export default function PaymentsPage() {
         )}
 
         {!isLoading && payments.length === 0 && !error && (
-          <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed rounded-xl bg-muted/30 text-center">
-            <ReceiptText className="h-10 w-10 text-muted-foreground/40 mb-3" />
-            <p className="text-muted-foreground font-medium">No hay registros de pagos.</p>
+          <div className={cn(
+            "flex flex-col items-center justify-center border-2 border-dashed rounded-xl bg-muted/30 text-center",
+            isMobile ? "py-12 px-6 mx-2" : "py-20"
+          )}>
+
+            <ReceiptText className={cn(
+              "text-muted-foreground/40 mb-3",
+              isMobile ? "h-8 w-8" : "h-10 w-10"
+            )} />
+
+
+            <h3 className={cn(
+              "font-semibold text-foreground",
+              isMobile ? "text-base" : "text-lg"
+            )}>
+              Sin historial de pagos
+            </h3>
+
+            <p className={cn(
+              "text-muted-foreground max-w-[250px] mx-auto mt-1",
+              isMobile ? "text-xs" : "text-sm"
+            )}>
+              Aún no tienes registros de pagos realizados en tu cuenta.
+            </p>
+
           </div>
         )}
       </CardContent>
