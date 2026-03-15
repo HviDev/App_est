@@ -9,6 +9,7 @@ import { ReceiptText } from "lucide-react";
 // 1. Importamos el hook del sidebar
 import { useSidebar } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge"; // Opcional, si tienes el componente Badge
+import { cn } from "@/lib/utils";
 
 
 import {
@@ -33,11 +34,11 @@ export default function PaymentsPage() {
 
 
   const formatCurrency = (amountRef: number | null | undefined) => {
-   if (amountRef === null || amountRef === undefined) return "-";
-        return new Intl.NumberFormat("es-MX", {
-          style: "currency",
-          currency: "MXN",
-        }).format(amountRef);
+    if (amountRef === null || amountRef === undefined) return "-";
+    return new Intl.NumberFormat("es-MX", {
+      style: "currency",
+      currency: "MXN",
+    }).format(amountRef);
   }
   // Cambiamos el tipo de dateString para que acepte nulos
   const formatDate = (dateString: string | null | undefined) => {
@@ -54,6 +55,16 @@ export default function PaymentsPage() {
     }).format(date);
   };
 
+
+  const statusStyles: Record<string, string> = {
+    PAGADO: "bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100",
+    PENDIENTE: "bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100",
+    VENCIDO: "bg-rose-100 text-rose-700 border-rose-200 hover:bg-rose-100",
+  };
+
+  const defaultStyle = "bg-slate-100 text-slate-700 border-slate-200";
+
+
   useEffect(() => {
     if (user?.$id) {
       fetchUserPayments(user.$id);
@@ -69,10 +80,10 @@ export default function PaymentsPage() {
           <CardDescription className="space-y-1">
             <span className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-medium text-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-              Pagos durante los primeros 5 días del mes.
+              Recuerda que los pagos deben realizarse durante los primeros 5 días del mes.
             </span>
             <span className="text-muted-foreground italic text-xs block">
-              El reflejo del pago puede tardar hasta 72 hrs.
+              El pago puede tardar en reflajarse hasta 72 hrs.
             </span>
           </CardDescription>
         </div>
@@ -108,7 +119,13 @@ export default function PaymentsPage() {
                             <span className="font-bold text-lg">{MONTHS[pago.monthIndex - 1]}</span>
                             <span className="text-xs text-muted-foreground">{pago.year}</span>
                           </div>
-                          <Badge variant={pago.status === 'PAGADO' ? 'outline' : 'secondary'} className="capitalize">
+                          <Badge
+                            variant="outline"
+                            className={cn(
+                              "capitalize font-medium",
+                              statusStyles[pago.status] || defaultStyle
+                            )}
+                          >
                             {pago.status?.toLowerCase() || 'En revisión'}
                           </Badge>
                         </div>
